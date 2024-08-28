@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: latters
+  datasource:
+    url: jdbc:postgresql://localhost:5432/latters
+    hikari:
+      username: latter-username
+      password: latter-password
+      read-only: false
+      maximum-pool-size: 3
+      connection-timeout: 30000 #default
+      validation-timeout: 5000
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50 # set the hibernate.jdbc.batch_size property to an integer between 10 and 50.
+        order_inserts: true
+        order_updates: true
+        format_sql: true
+    generate-ddl: true
