@@ -2,10 +2,10 @@ spring:
   application:
     name: latters
   datasource:
-    url: jdbc:postgresql://localhost:5432/latters
+    url: jdbc:postgresql://localhost:5432/postgres
     hikari:
-      username: latter-username
-      password: latter-password
+      username: postgres
+      password: postgres
       read-only: false
       maximum-pool-size: 3
       connection-timeout: 30000 #default
