@@ -31,12 +31,6 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("회원탈퇴 테스트")
-    void deleteUser() {
-
-    }
-
-    @Test
     @DisplayName("인증코드 검증 성공 테스트")
     void verifyVerificationCode() {
 
