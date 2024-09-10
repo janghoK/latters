@@ -35,4 +35,12 @@ public class VerificationCodeTest {
         Assertions.assertDoesNotThrow(() -> validCode.validate(verificationCode));
     }
 
+    @Test
+    @DisplayName("인증 코드를 생성한다.")
+    void generateVerificationCode() {
+        VerificationCode verificationCode = VerificationCode.generate();
+
+        Assertions.assertNotNull(verificationCode.getVerificationCode());
+        Assertions.assertNotNull(verificationCode.getVerificationCodeExpiresIn());
+    }
 }

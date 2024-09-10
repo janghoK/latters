@@ -5,6 +5,7 @@ import com.jangho.latters.common.model.enums.ResponseCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -33,12 +34,16 @@ public class Password implements Credential {
     }
 
     public void changePassword(String currentPassword, String newPassword) {
-        if (match(currentPassword)) {
-            this.password = newPassword;
-            this.validate();
-        } else {
+        if (!StringUtils.hasText(currentPassword)) {
+            throw new CustomException(ResponseCode.FAIL, "기존 비밀번호를 입력해주세요.");
+        } else if (!StringUtils.hasText(newPassword)) {
+            throw new CustomException(ResponseCode.FAIL, "새 비밀번호를 입력해주세요.");
+        } else if (!match(currentPassword)) {
             throw new CustomException(ResponseCode.FAIL, "비밀번호가 일치하지 않습니다.");
         }
+
+        this.password = newPassword;
+        this.validate();
     }
 
     @Override

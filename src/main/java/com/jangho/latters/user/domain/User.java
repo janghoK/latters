@@ -11,26 +11,24 @@ import java.time.Instant;
 
 @Getter
 public class User {
-    private Long id;
-    private Credential email;
-    private Credential password;
+    private final Long id;
+    private final Email email;
+    private final Password password;
 
     private String name;
 
     private Instant lastLoginAt;
-    private String verificationCode;
-    private Instant verificationCodeExpiresIn;
     private Instant activatedAt;
+    private VerificationCode verificationCode;
 
     @Builder
-    public User(Long id, Credential email, Credential password, String name, Instant lastLoginAt, String verificationCode, Instant verificationCodeExpiresIn, Instant activatedAt) {
+    public User(Long id, Email email, Password password, String name, Instant lastLoginAt, VerificationCode verificationCode, Instant activatedAt) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.lastLoginAt = lastLoginAt;
         this.verificationCode = verificationCode;
-        this.verificationCodeExpiresIn = verificationCodeExpiresIn;
         this.activatedAt = activatedAt;
     }
 
@@ -45,15 +43,42 @@ public class User {
     public void join() {
         this.email.validate();
         this.password.validate();
-        
+        this.updateName(this.name);
+
         this.activatedAt = Instant.now();
     }
 
     public void updateName(String name) {
         if (!StringUtils.hasText(name)) {
             throw new CustomException(ResponseCode.FAIL, "이름은 필수입니다.");
+        } else if (name.length() > 20) {
+            throw new CustomException(ResponseCode.FAIL, "이름은 20자 이하로 입력해주세요.");
+        } else if (name.length() < 2) {
+            throw new CustomException(ResponseCode.FAIL, "이름은 2자 이상 입력해주세요.");
         }
 
         this.name = name;
+    }
+
+    public void changePassword(PasswordEncoder passwordEncoder, String currentPassword, String newPassword) {
+        this.password.setPasswordEncoder(passwordEncoder);
+        this.password.changePassword(currentPassword, newPassword);
+    }
+
+    public void generateVerificationCode() {
+        this.verificationCode = VerificationCode.generate();
+    }
+
+    public void verifyVerificationCode(String code) {
+        this.verificationCode.validate(code);
+        this.verificationCode = null;
+    }
+
+    public void login() {
+        this.lastLoginAt = Instant.now();
+    }
+
+    public String getEmail() {
+        return this.email.getEmail();
     }
 }

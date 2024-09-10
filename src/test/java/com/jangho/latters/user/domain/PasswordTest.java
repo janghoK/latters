@@ -2,7 +2,6 @@ package com.jangho.latters.user.domain;
 
 import com.jangho.latters.common.exception.CustomException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,12 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 class PasswordTest {
 
-    static PasswordEncoder givenPasswordEncoder;
-
-    @BeforeAll
-    static void beforeAll() {
-        givenPasswordEncoder = new BCryptPasswordEncoder();
-    }
+    PasswordEncoder givenPasswordEncoder = new BCryptPasswordEncoder();
 
     @Test
     @DisplayName("비밀번호 검증 성공")
