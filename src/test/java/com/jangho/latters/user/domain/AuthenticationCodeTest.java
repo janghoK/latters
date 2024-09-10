@@ -11,7 +11,7 @@ class AuthenticationCodeTest {
     @Test
     @DisplayName("회원가입 이메일 인증코드를 생성한다.")
     void generate() {
-        Email givenEmail = Email.from("test@example.com");
+        String givenEmail = "test@example.com";
         AuthenticationCode givenCode = AuthenticationCode.generate(givenEmail);
 
         Assertions.assertAll(
@@ -25,7 +25,7 @@ class AuthenticationCodeTest {
     void verifyVerificationCode() {
         Email givenEmail = Email.from("test@example.com");
         VerificationCode givenVerificationCode = VerificationCode.generate();
-        AuthenticationCode givenCode = new AuthenticationCode(givenEmail, givenVerificationCode);
+        AuthenticationCode givenCode = new AuthenticationCode(null, givenEmail, givenVerificationCode);
 
         Assertions.assertDoesNotThrow(() -> givenCode.verifyVerificationCode(givenVerificationCode.getVerificationCode()));
     }
