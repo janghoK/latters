@@ -2,7 +2,6 @@ package com.jangho.latters.user.domain;
 
 import com.jangho.latters.common.exception.CustomException;
 import com.jangho.latters.common.model.enums.ResponseCode;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
@@ -14,7 +13,7 @@ public class Email implements Credential{
         this.email = email;
     }
 
-    public static Email from (String email) {
+    public static Email from(String email) {
         return new Email(email);
     }
 
