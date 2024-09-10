@@ -114,6 +114,15 @@ class UserTest {
     }
 
     @Test
+    @DisplayName("비밀번호를 초기화한다.")
+    void resetPassword() {
+        String newPassword = "newPassword";
+
+        Assertions.assertDoesNotThrow(() -> joinedUser.resetPassword(passwordEncoder, newPassword));
+    }
+
+
+    @Test
     @DisplayName("인증코드를 생성한다.")
     void generateVerificationCode() {
         joinedUser.generateVerificationCode();

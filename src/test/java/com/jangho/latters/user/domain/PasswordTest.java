@@ -101,6 +101,22 @@ class PasswordTest {
     }
 
     @Test
+    @DisplayName("비밀번호 재설정 성공")
+    void resetPassword() {
+        String savedPassword = "password1234";
+        String newPassword = "newPassword1234";
+
+        Password password = Password.of(savedPassword, givenPasswordEncoder);
+
+        Assertions.assertAll(
+                () -> Assertions.assertDoesNotThrow(password::validate),
+                () -> Assertions.assertDoesNotThrow(() -> password.resetPassword(newPassword)),
+                () -> Assertions.assertTrue(password.match(newPassword))
+        );
+    }
+
+
+    @Test
     @DisplayName("password encoder가 null이면 오류를 반환한다.")
     void passwordEncoderIsNull() {
         // given

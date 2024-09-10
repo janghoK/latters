@@ -65,6 +65,11 @@ public class User {
         this.password.changePassword(currentPassword, newPassword);
     }
 
+    public void resetPassword(PasswordEncoder passwordEncoder, String newPassword) {
+        this.password.setPasswordEncoder(passwordEncoder);
+        this.password.resetPassword(newPassword);
+    }
+
     public void generateVerificationCode() {
         this.verificationCode = VerificationCode.generate();
     }
