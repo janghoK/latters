@@ -1,4 +1,4 @@
-package com.jangho.latters.common.model;
+package com.jangho.latters.common.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
