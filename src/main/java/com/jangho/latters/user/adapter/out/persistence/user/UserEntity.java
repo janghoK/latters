@@ -1,6 +1,6 @@
 package com.jangho.latters.user.adapter.out.persistence.user;
 
-import com.jangho.latters.common.model.BaseEntity;
+import com.jangho.latters.common.model.entity.BaseEntity;
 import com.jangho.latters.user.adapter.out.persistence.user.converter.EmailConverter;
 import com.jangho.latters.user.adapter.out.persistence.user.converter.PasswordConverter;
 import com.jangho.latters.user.domain.Email;
