@@ -25,3 +25,7 @@ spring:
         order_updates: true
         format_sql: true
     generate-ddl: true
+  security:
+    encrypt:
+      aes-password: "644d344dc5ec1ba0f7444d166a2ac20f385e8add6117e17377d9edddc41be274"
+      aes-salt: "e2b189d32f788cbc7e19e7d84eea7eb11aeb784753011dd47d3732e9cc96cccc"
