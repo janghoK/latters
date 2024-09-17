@@ -8,9 +8,9 @@ public interface UserUseCase {
 
     void sendAuthenticationCode(String email);
     void sendVerificationCode(String email);
-    void join(User user, String authenticationCode);
+    User join(String email, String rawPassword, String name, String authenticationCode);
     User updateProfile(Long id, String name);
-    void resetPassword(User user, String verificationCode);
-    void updatePassword(Long id, User user, String currentPassword);
-    void withdrawal(Long id, String reason);
+    User resetPassword(String email, String newPassword, String verificationCode);
+    User updatePassword(Long id, String currentPassword, String newPassword);
+    void withdrawal(Long id);
 }

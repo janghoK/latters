@@ -46,6 +46,15 @@ public class Password implements Credential {
         this.validate();
     }
 
+    public void resetPassword(String newPassword) {
+        if (!StringUtils.hasText(newPassword)) {
+            throw new CustomException(ResponseCode.FAIL, "새 비밀번호를 입력해주세요.");
+        }
+
+        this.password = newPassword;
+        this.validate();
+    }
+
     @Override
     public void validate() {
         if (!isValidPassword(password)) {
