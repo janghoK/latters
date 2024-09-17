@@ -11,6 +11,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthenticationCodePersistenceAdapter implements AuthenticationCodePersistencePort {
 
+    private final AuthenticationCodeRepository authenticationCodeRepository;
+
     @Override
     public Optional<AuthenticationCode> findByEmail(String email) {
         return Optional.empty();
