@@ -1,6 +1,6 @@
 package com.jangho.latters.user.adapter.out.persistence.authentication;
 
-import com.jangho.latters.common.model.BaseEntity;
+import com.jangho.latters.common.model.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

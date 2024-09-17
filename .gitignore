@@ -39,3 +39,6 @@ out/
 ### Database ###
 postgres-data/
 postgres-data/**
+
+### restdoc ###
+src/main/resources/static/docs/**
