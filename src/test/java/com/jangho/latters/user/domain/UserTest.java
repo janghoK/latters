@@ -118,7 +118,10 @@ class UserTest {
     void resetPassword() {
         String newPassword = "newPassword";
 
-        Assertions.assertDoesNotThrow(() -> joinedUser.resetPassword(passwordEncoder, newPassword));
+        Assertions.assertAll(
+                () -> Assertions.assertDoesNotThrow(() -> joinedUser.resetPassword(passwordEncoder, newPassword)),
+                () -> Assertions.assertTrue(() -> joinedUser.getPassword().match(newPassword))
+        );
     }
 
 

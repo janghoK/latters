@@ -14,13 +14,13 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     private final UserRepository userRepository;
 
     @Override
-    public void create(User user) {
-
+    public User create(User user) {
+        return null;
     }
 
     @Override
-    public void update(Long id, User user) {
-
+    public User update(Long id, User user) {
+        return null;
     }
 
     @Override
@@ -30,6 +30,11 @@ public class UserPersistenceAdapter implements UserPersistencePort {
 
     @Override
     public Optional<User> findById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
         return Optional.empty();
     }
 }
