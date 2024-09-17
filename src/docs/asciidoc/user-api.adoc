@@ -1,0 +1,14 @@
+== User
+=== getUser
+==== http request
+include::{snippets}/user-get/http-request.adoc[]
+==== http response
+include::{snippets}/user-get/http-response.adoc[]
+==== request body
+include::{snippets}/user-get/request-body.adoc[]
+==== response body
+include::{snippets}/user-get/response-body.adoc[]
+==== path parameters
+include::{snippets}/user-get/path-parameters.adoc[]
+==== response fields
+include::{snippets}/user-get/response-fields.adoc[]
