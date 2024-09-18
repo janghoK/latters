@@ -7,7 +7,6 @@ import org.springframework.security.authentication.dao.AbstractUserDetailsAuthen
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,16 +18,18 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
 
     private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
 
-    private PasswordEncoder passwordEncoder;
 
     private volatile String userNotFoundEncodedPassword;
 
-    private UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
 
-    private UserDetailsPasswordService userDetailsPasswordService;
 
-    public CustomUserDetailsAuthenticationProvider(PasswordEncoder passwordEncoder) {
-        setPasswordEncoder(passwordEncoder);
+    public CustomUserDetailsAuthenticationProvider(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+        Assert.notNull(passwordEncoder, "passwordEncoder cannot be null");
+        this.passwordEncoder = passwordEncoder;
+        this.userNotFoundEncodedPassword = null;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -79,13 +80,6 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication,
                                                          UserDetails user) {
-        boolean upgradeEncoding = this.userDetailsPasswordService != null
-                && this.passwordEncoder.upgradeEncoding(user.getPassword());
-        if (upgradeEncoding) {
-            String presentedPassword = authentication.getCredentials().toString();
-            String newPassword = this.passwordEncoder.encode(presentedPassword);
-            user = this.userDetailsPasswordService.updatePassword(user, newPassword);
-        }
         return super.createSuccessAuthentication(principal, authentication, user);
     }
 
@@ -100,11 +94,5 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
             String presentedPassword = authentication.getCredentials().toString();
             this.passwordEncoder.matches(presentedPassword, this.userNotFoundEncodedPassword);
         }
-    }
-
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        Assert.notNull(passwordEncoder, "passwordEncoder cannot be null");
-        this.passwordEncoder = passwordEncoder;
-        this.userNotFoundEncodedPassword = null;
     }
 }
