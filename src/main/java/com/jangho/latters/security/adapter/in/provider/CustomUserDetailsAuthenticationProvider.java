@@ -17,10 +17,7 @@ import org.springframework.util.Assert;
 public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
-
-
     private volatile String userNotFoundEncodedPassword;
-
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
 
